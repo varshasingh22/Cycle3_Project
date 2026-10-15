@@ -1,0 +1,52 @@
+CREATE DATABASE sales;
+USE sales;
+-- 1.Unique sales channel whose name start with "Ama" 
+SELECT DISTINCT sales_channel AS channel_name
+FROM vrinda_sales
+LIMIT 5;
+
+SELECT DISTINCT sales_channel AS channel_name
+FROM vrinda_sales
+WHERE sales_channel LIKE "Ama%";
+
+
+-- 2.Find matching product categories
+SELECT DISTINCT category 
+FROM vrinda_products
+LIMIT 10;
+
+SELECT DISTINCT category AS product_category
+FROM vrinda_products
+WHERE category LIKE "kurta%";
+
+-- 3.Filter and display delivered sales
+SELECT 
+	cust_id AS customer_id,
+	order_id AS order_name,
+	sales_channel AS channel_name,
+	amount AS sale_amount
+FROM vrinda_sales
+WHERE order_status = "Delivered"
+ORDER BY amount DESC
+LIMIT 10;
+
+-- 4.Find unique shipping cities in Uttar Pradesh
+SELECT DISTINCT ship_city 
+FROM vrinda_sales;
+
+SELECT DISTINCT ship_city AS city_name 
+FROM vrinda_sales
+ORDER BY ship_city ASC
+LIMIT 10;
+
+
+-- 5.Find sales from selected channels
+SELECT 
+	order_id AS order_number,
+    sales_channel AS channel_name,
+    amount AS sale_amount
+FROM vrinda_sales
+WHERE sales_channel LIKE "M%"
+	AND amount BETWEEN 500 AND 2000
+ORDER BY amount DESC
+LIMIT 10;
